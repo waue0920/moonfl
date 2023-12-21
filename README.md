@@ -46,3 +46,9 @@
 * args.dataset == 'femnist':    n_classes = 26
 * args.dataset == 'emnist':    n_classes = 47
 * args.dataset == 'xray': n_classes = 2*
+# alg
+* args.alg == 'moon':
+* args.alg == 'fedavg':
+* args.alg == 'fedprox':
+* args.alg == 'local_training':
+* args.alg == 'all_in'

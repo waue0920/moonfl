@@ -504,8 +504,6 @@ if __name__ == '__main__':
                 torch.save(nets[0].state_dict(), args.modeldir+'fedcon/localmodel0'+args.log_file_name+'.pth')
                 for nets_id, old_nets in enumerate(old_nets_pool):
                     torch.save({'pool'+ str(nets_id) + '_'+'net'+str(net_id): net.state_dict() for net_id, net in old_nets.items()}, args.modeldir+'fedcon/prev_model_pool_'+args.log_file_name+'.pth')
-
-
     elif args.alg == 'fedavg':
         for round in range(n_comm_rounds):
             logger.info("in comm round:" + str(round))
@@ -600,14 +598,12 @@ if __name__ == '__main__':
             mkdirs(args.modeldir + 'fedprox/')
             global_model.to('cpu')
             torch.save(global_model.state_dict(), args.modeldir +'fedprox/'+args.log_file_name+ '.pth')
-
     elif args.alg == 'local_training':
         logger.info("Initializing nets")
         local_train_net(nets, args, net_dataidx_map, train_dl=train_dl,test_dl=test_dl, device=device)
         mkdirs(args.modeldir + 'localmodel/')
         for net_id, net in nets.items():
             torch.save(net.state_dict(), args.modeldir + 'localmodel/'+'model'+str(net_id)+args.log_file_name+ '.pth')
-
     elif args.alg == 'all_in':
         nets, _, _ = init_nets(args.net_config, 1, args, device='cpu')
         # nets[0].to(device)
