@@ -40,9 +40,9 @@
 * ('--server_momentum', type=float, default=0, help='the server momentum(FedAvgM)')
 # dataset 
 * args.dataset in {'mnist', 'cifar10', 'svhn', 'fmnist'}:    n_classes = 10
-* args.dataset == 'celeba':    n_classes = 2
-* args.dataset == 'cifar100':    n_classes = 100
 * args.dataset == 'tinyimagenet':    n_classes = 200
+* args.dataset == 'cifar100':    n_classes = 100
+* args.dataset == 'celeba':    n_classes = 2
 * args.dataset == 'femnist':    n_classes = 26
 * args.dataset == 'emnist':    n_classes = 47
 * args.dataset == 'xray': n_classes = 2*

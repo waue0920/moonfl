@@ -1,0 +1,32 @@
+{
+    // 使用 IntelliSense 以得知可用的屬性。
+    // 暫留以檢視現有屬性的描述。
+    // 如需詳細資訊，請瀏覽: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: 目前的檔案",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--alg",
+                "moon",
+                "--partition",
+                "homo",
+                "--lr",
+                "0.1",
+                "--dataset",
+                "cifar10",
+                "--local_max_epoch",
+                "2",
+                "--model",
+                "resnet50",
+                "--batch-size",
+                "64",
+            ]
+        }
+    ]
+}

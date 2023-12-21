@@ -11,6 +11,7 @@ import datetime
 import random
 from model import *
 from utils import *
+import wandb
 
 # moon 的訓練不會用到，fedavg... 才會
 def train_net(net_id, net, train_dataloader, test_dataloader, epochs, lr, args_optimizer, args, device="cpu"):
@@ -316,11 +317,30 @@ def local_train_net(nets, args, net_dataidx_map,
         server_c.to('cpu')
     return nets
 
+def get_wandb_config( args, config):
+    config.learning_rate = args.lr
+    config.batch_size = args.batch_size
+    config.epochs = args.epochs
+    config.optimizer = args.optimizer
+    config.dataset = args.dataset
+    config.partition = args.partition
+    config.n_parties = args.n_parties
+    config.comm_round = args.comm_round
+    config.momentum = args.server_momentum
+    config.alg = args.alg
+    return config
+
 
 if __name__ == '__main__':
+
     args = get_args()
     mkdirs(args.logdir)
     mkdirs(args.modeldir)
+    
+    wandb.login()
+    wandb.init(project="moonfl")
+    config = get_wandb_config(args=args, config=wandb.config)
+    
     if args.log_file_name is None:
         argument_path = 'experiment_arguments-%s.json' % datetime.datetime.now().strftime("%Y-%m-%d-%H%M-%S")
     else:
@@ -469,7 +489,9 @@ if __name__ == '__main__':
 
             global_model.load_state_dict(global_w)
             #summary(global_model.to(device), (3, 32, 32))
-
+            wandb.watch(global_model, log="all")
+            wandb.save('model.h5')
+            
             logger.info('global n_training: %d' % len(train_dl_global))
             logger.info('global n_test: %d' % len(test_dl))
             global_model.cuda()
