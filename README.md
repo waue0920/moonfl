@@ -39,10 +39,10 @@
 * ('--use_project_head', type=int, default=1)
 * ('--server_momentum', type=float, default=0, help='the server momentum(FedAvgM)')
 # dataset 
-if args.dataset in {'mnist', 'cifar10', 'svhn', 'fmnist'}:    n_classes = 10
-elif args.dataset == 'celeba':    n_classes = 2
-elif args.dataset == 'cifar100':    n_classes = 100
-elif args.dataset == 'tinyimagenet':    n_classes = 200
-elif args.dataset == 'femnist':    n_classes = 26
-elif args.dataset == 'emnist':    n_classes = 47
-elif args.dataset == 'xray': n_classes = 2
+* args.dataset in {'mnist', 'cifar10', 'svhn', 'fmnist'}:    n_classes = 10
+* args.dataset == 'celeba':    n_classes = 2
+* args.dataset == 'cifar100':    n_classes = 100
+* args.dataset == 'tinyimagenet':    n_classes = 200
+* args.dataset == 'femnist':    n_classes = 26
+* args.dataset == 'emnist':    n_classes = 47
+* args.dataset == 'xray': n_classes = 2*
