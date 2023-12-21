@@ -1,3 +1,7 @@
+logs/*
+data/*
+__pycache__/*
+
 # Object file
 *.o
 
