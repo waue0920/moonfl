@@ -306,6 +306,7 @@ def local_train_net(nets, args, net_dataidx_map,
         avg_acc += testacc
         acc_list.append(testacc)
     avg_acc /= args.n_parties
+    wandb.log({"avg_acc": avg_acc}) # log avg_acc
     if args.alg == 'local_training':
         logger.info("avg test acc %f" % avg_acc)
         logger.info("std acc %f" % np.std(acc_list))
@@ -489,7 +490,7 @@ if __name__ == '__main__':
 
             global_model.load_state_dict(global_w)
             #summary(global_model.to(device), (3, 32, 32))
-            wandb.watch(global_model, log="all")
+            # wandb.watch(global_model, log="all")
             wandb.save('model.h5')
             
             logger.info('global n_training: %d' % len(train_dl_global))
@@ -498,6 +499,11 @@ if __name__ == '__main__':
             train_acc, train_loss = compute_accuracy(global_model, train_dl_global, device=device)
             test_acc, conf_matrix, _ = compute_accuracy(global_model, test_dl, get_confusion_matrix=True, device=device)
             global_model.to('cpu')
+            wandb.log({"train_acc": train_acc, 
+                       "test_acc": test_acc, 
+                       "train_loss": train_loss,
+                       "conf_matrix": conf_matrix})
+            
             logger.info('>> Global Model Train accuracy: %f' % train_acc)
             logger.info('>> Global Model Test accuracy: %f' % test_acc)
             logger.info('>> Global Model Train loss: %f' % train_loss)
