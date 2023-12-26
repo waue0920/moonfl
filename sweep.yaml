@@ -1,0 +1,18 @@
+method: bayes
+metric:
+  goal: minimize
+  name: avg_acc
+parameters:
+  alg:
+    distribution: categorical
+    values:
+      - moon
+  comm_round:
+    distribution: int_uniform
+    max: 6
+    min: 2
+  dataset:
+    distribution: categorical
+    values:
+      - cifar10
+program: main.py
